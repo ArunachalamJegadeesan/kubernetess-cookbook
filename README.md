@@ -6,6 +6,12 @@ Kubernetees Hands on...!!!
 ```
 gcloud container clusters get-credentials standard-cluster-1 --zone us-central1-a --project kubernetes-01-222705
 
+kubectl apply -f backend-deployment.yaml
+
+kubectl apply -f frontend-deployment.yaml
+
+kubectl apply -f middletier-deployment.yaml
+
 ```
 
 
@@ -15,6 +21,7 @@ NAME                              READY     STATUS    RESTARTS   AGE
 bff-fb65d7ffd-cgj6n               1/1       Running   0          10m
 catalogservice-658db56b9b-nm5rv   1/1       Running   0          13m
 frontend-7fc7b9b846-77hr8         1/1       Running   0          9m
+
 arun-mac:~ arunaja$ kubectl get services
 NAME             TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE
 bff              ClusterIP      10.11.245.194   <none>          6060/TCP         10m
