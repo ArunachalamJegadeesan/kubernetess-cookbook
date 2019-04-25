@@ -90,3 +90,15 @@ BFF_SERVICE_HOST=10.11.245.194
 FRONTEND_PORT_8080_TCP_PORT=8080
 /deploy #
 ```
+
+```
+kubectl cluster-info
+Kubernetes master is running at https://34.66.62.137
+
+GLBCDefaultBackend is running at https://34.66.62.137/api/v1/namespaces/kube-system/services/default-http-backend:http/proxy
+Heapster is running at https://34.66.62.137/api/v1/namespaces/kube-system/services/heapster/proxy
+KubeDNS is running at https://34.66.62.137/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Metrics-server is running at https://34.66.62.137/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+```
