@@ -1,0 +1,49 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: bff
+spec:
+  selector:
+    matchLabels:
+      app: bff
+      tier: middletier
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bff
+        tier: middletier
+    spec:
+      containers:
+      - name: bff
+        image: arunaja/bff:latest  
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: PROTOCOL
+          value: "http://"
+        - name: SUFIX
+          value: "/catalog"
+        - name: SEPERATOR
+          value: ":"
+        - name: catalog.service.endpoint.url
+          value: $(PROTOCOL)$(CATALOGSERVICE_SERVICE_HOST)$(SEPERATOR)$(CATALOGSERVICE_SERVICE_PORT)$(SUFIX)
+        ports:
+        - containerPort: 6060
+      ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bff
+  labels:
+    app: bff
+    tier: middletier
+spec:
+  ports:
+  - port: 6060
+    targetPort: 6060
+  selector:
+    app: bff
+    tier: middletier

@@ -1,0 +1,40 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: catalogservice
+spec:
+  selector:
+    matchLabels:
+      app: catalogservice
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: catalogservice
+        tier: backend
+    spec:
+      containers:
+      - name: catalogservice
+        image: arunaja/catalogservice:latest  
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 7070
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalogservice
+  labels:
+    app: catalogservice
+    tier: backend
+spec:
+  ports:
+  - port: 7070
+    targetPort: 7070
+  selector:
+    app: catalogservice
+    tier: backend

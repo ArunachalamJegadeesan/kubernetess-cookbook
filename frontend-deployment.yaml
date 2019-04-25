@@ -1,0 +1,53 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: productcatalogweb
+      tier: frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: productcatalogweb
+        tier: frontend
+    spec:
+      containers:
+      - name: boot-web
+        image: arunaja/productcatalogwebapp:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: PROTOCOL
+          value: "http://"
+        - name: SUFIX
+          value: "/bff/catalog"
+        - name: SEPERATOR
+          value: ":"
+        - name: bff.endpoint.url
+          value:  $(PROTOCOL)$(BFF_SERVICE_HOST)$(SEPERATOR)$(BFF_SERVICE_PORT)$(SUFIX)
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: productcatalogweb
+    tier: frontend
+spec:
+  # Try different proxy types, ClusterIP, NodePort
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    #Add in when using NodePort as an option
+    #nodePort: 30080
+    #name: http
+  selector:
+    app: productcatalogweb
+    tier: frontend
