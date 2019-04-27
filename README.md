@@ -5,7 +5,7 @@ Kubernetees Hands on...!!!
 
 
 ### Workout
-#### follow the order of apply because of interdependendcy of pods
+#### Follow the order of apply because of interdependendcy of pods
 
 ```
 gcloud container clusters get-credentials standard-cluster-1 --zone us-central1-a --project kubernetes-01-222705
@@ -47,7 +47,83 @@ arun-mac:kubernetess-cookbook arunaja$
 
 ```
 
-# _Looking deep into the pod and understanding the environment varibales generated_
+## _Looking in to the mysql database POD and querying the database 
+
+
+```
+
+arun-mac:kubernetess-cookbook arunaja$ kubectl exec -it mysql-5bc986964c-dng6x /bin/sh
+# printenv
+KUBERNETES_SERVICE_PORT=443
+KUBERNETES_PORT=tcp://10.11.240.1:443
+HOSTNAME=mysql-5bc986964c-dng6x
+MYSQL_MAJOR=5.6
+HOME=/root
+MYSQL_ROOT_PASSWORD=root
+TERM=xterm
+MYSQL_PORT_3306_TCP_ADDR=10.11.253.1
+KUBERNETES_PORT_443_TCP_ADDR=10.11.240.1
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+MYSQL_VERSION=5.6.44-1debian9
+KUBERNETES_PORT_443_TCP_PORT=443
+MYSQL_PORT_3306_TCP_PORT=3306
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+MYSQL_SERVICE_HOST=10.11.253.1
+MYSQL_PORT_3306_TCP_PROTO=tcp
+MYSQL_SERVICE_PORT=3306
+MYSQL_PORT=tcp://10.11.253.1:3306
+KUBERNETES_SERVICE_PORT_HTTPS=443
+KUBERNETES_PORT_443_TCP=tcp://10.11.240.1:443
+MYSQL_PORT_3306_TCP=tcp://10.11.253.1:3306
+GOSU_VERSION=1.7
+KUBERNETES_SERVICE_HOST=10.11.240.1
+PWD=/
+# mysql -uroot -proot
+Warning: Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 5.6.44 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| information_schema  |
+| #mysql50#lost+found |
+| mysql               |
+| performance_schema  |
+| test                |
++---------------------+
+5 rows in set (0.00 sec)
+
+mysql> use test;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from products;
++----+-----------+-----------------+-------------+------------+-------+
+| id | available | product_name    | region_code | state_code | usoc  |
++----+-----------+-----------------+-------------+------------+-------+
+|  1 | Y         | Silver Bullet   | Tampa       | TX         | j2345 |
+|  2 | Y         | Platinum Bullet | Dallas      | TX         | j2345 |
+|  3 | Y         | Steal Bullet    | Tampa       | TX         | j2345 |
++----+-----------+-----------------+-------------+------------+-------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+``
+
+## _Looking deep into the pod and understanding the environment varibales generated_
 
 ```
 arun-mac:~ arunaja$ kubectl exec -it frontend-7fc7b9b846-77hr8  /bin/sh
