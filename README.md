@@ -1,5 +1,7 @@
 # kubernetess-cookbook
-Kubernetees Hands on...!!!
+Kubernetees Hands on...!!!  
+This document is specific about kubernetes clusters in  kubernetes engine service in GCP cloid . How ever most of the steps will remain same. 
+Happy reading ....!
 
  #### Working version of multitier kubernetes web , microservices and database application with persistance volume 
 
