@@ -102,3 +102,57 @@ Metrics-server is running at https://34.66.62.137/api/v1/namespaces/kube-system/
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
+### INSTALLING KUBERNETES DASHBOARD
+
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+
+```
+For GCP Kubernetes Engine Clusters , it comes out of the box , enable it at the time of cluster creation
+
+```
+arun-mac:~ arunaja$ kubectl proxy
+Starting to serve on 127.0.0.1:8001
+
+```
+```
+Kubectl will make Dashboard available at http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/.
+
+```
+
+**_login use aacess token option_
+
+```
+kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: REDACTED
+    server: https://34.66.232.74
+  name: gke_kubernetes-01-222705_us-central1-a_standard-cluster-1
+contexts:
+- context:
+    cluster: gke_kubernetes-01-222705_us-central1-a_standard-cluster-1
+    user: gke_kubernetes-01-222705_us-central1-a_standard-cluster-1
+  name: gke_kubernetes-01-222705_us-central1-a_standard-cluster-1
+current-context: gke_kubernetes-01-222705_us-central1-a_standard-cluster-1
+kind: Config
+preferences: {}
+users:
+- name: gke_kubernetes-01-222705_us-central1-a_standard-cluster-1
+  user:
+    auth-provider:
+      config:
+        access-token: ya29.Glz4Biw3XhQVIlMox5RdDR3dkfpqxF0h1NQnCGVRWAyIbH6VnrVdQ2AFm756CQ8ohK3gDrTiJfUWQHxcvTNaqpnKG9K502bEAdbsMCrKnfH8Yq78-ZGcbZc6-9MRYA
+        cmd-args: config config-helper --format=json
+        cmd-path: /Users/arunaja/google-cloud-sdk/bin/gcloud
+        expiry: 2019-04-27T07:56:39Z
+        expiry-key: '{.credential.token_expiry}'
+        token-key: '{.credential.access_token}'
+      name: gcp
+      
+      ```
+      access-token: ya29.Glz4Biw3XhQVIlMox5RdDR3dkfpqxF0h1NQnCGVRWAyIbH6VnrVdQ2AFm756CQ8ohK3gDrTiJfUWQHxcvTNaqpnKG9K502bEAdbsMCrKnfH8Yq78-ZGcbZc6-9MRYA
+   
+   
+   ![alt text](dashboard.png)
