@@ -51,7 +51,6 @@ arun-mac:kubernetess-cookbook arunaja$
 
 
 ```
-
 arun-mac:kubernetess-cookbook arunaja$ kubectl exec -it mysql-5bc986964c-dng6x /bin/sh
 # printenv
 KUBERNETES_SERVICE_PORT=443
@@ -121,9 +120,9 @@ mysql> select * from products;
 
 mysql>
 
-``
+```
 
-## _Looking deep into the pod and understanding the environment varibales generated_
+## _Looking into the pod and understanding the environment varibales generated_
 
 ```
 arun-mac:~ arunaja$ kubectl exec -it frontend-7fc7b9b846-77hr8  /bin/sh
