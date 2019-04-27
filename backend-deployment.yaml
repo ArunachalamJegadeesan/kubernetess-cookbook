@@ -21,6 +21,15 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
+        env:
+        - name: PROTOCOL
+          value: "jdbc:mysql://"
+        - name: SUFIX
+          value: "/test?createDatabaseIfNotExist=true&useSSL=false"
+        - name: HOST
+          value: "10.11.240.33:3306"
+        - name: spring.datasource.url
+          value: $(PROTOCOL)$(HOST)$(SUFIX)    
         ports:
         - containerPort: 7070
 ---
