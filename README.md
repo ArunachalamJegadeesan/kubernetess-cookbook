@@ -5,21 +5,24 @@ Kubernetees Hands on...!!!
 
 
 ### Workout
+#### follow the order of apply because of interdependendcy of pods
 
 ```
 gcloud container clusters get-credentials standard-cluster-1 --zone us-central1-a --project kubernetes-01-222705
+
+kubectl create -f mysql-deployment.yaml
 
 kubectl apply -f backend-deployment.yaml
 deployment.apps/catalogservice created
 service/catalogservice created
 
-kubectl apply -f frontend-deployment.yaml
-deployment.apps/frontend created
-service/frontend created
-
 kubectl apply -f middletier-deployment.yaml
 deployment.apps/bff created
 service/bff created
+
+kubectl apply -f frontend-deployment.yaml
+deployment.apps/frontend created
+service/frontend created
 
 ```
 
