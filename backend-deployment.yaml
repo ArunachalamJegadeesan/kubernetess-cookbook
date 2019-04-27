@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: catalogservice
       tier: backend
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -26,8 +26,10 @@ spec:
           value: "jdbc:mysql://"
         - name: SUFIX
           value: "/test?createDatabaseIfNotExist=true&useSSL=false"
+        - name: SEPERATOR
+          value: ":"
         - name: HOST
-          value: "10.11.240.33:3306"
+          value: $(MYSQL_PORT_3306_TCP_ADDR)$(SEPERATOR)$(MYSQL_SERVICE_PORT)
         - name: spring.datasource.url
           value: $(PROTOCOL)$(HOST)$(SUFIX)    
         ports:
