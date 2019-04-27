@@ -156,7 +156,7 @@ users:
    
 
 
-   ![Kubernetes Dashboard View](https://github.com/ArunachalamJegadeesan/kubernetess-cookbook/blob/master/dashboard.png)
+   ![Kubernetes Dashboard View](https://github.com/ArunachalamJegadeesan/kubernetess-cookbook/blob/master/dashboard.png "Kubernetes Dashboard")
    
    
    
