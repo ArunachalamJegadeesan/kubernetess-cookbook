@@ -25,19 +25,23 @@ service/bff created
 
 
 ```
-arun-mac:~ arunaja$ kubectl get pods
+arun-mac:kubernetess-cookbook arunaja$ kubectl get pods
 NAME                              READY     STATUS    RESTARTS   AGE
-bff-fb65d7ffd-cgj6n               1/1       Running   0          10m
-catalogservice-658db56b9b-nm5rv   1/1       Running   0          13m
-frontend-7fc7b9b846-77hr8         1/1       Running   0          9m
+bff-fb65d7ffd-mdjhv               1/1       Running   0          14m
+catalogservice-78b9749899-hgml5   1/1       Running   0          6m
+catalogservice-78b9749899-sfrq2   1/1       Running   0          7m
+frontend-7fc7b9b846-2svrx         1/1       Running   0          14m
+frontend-7fc7b9b846-xghd9         1/1       Running   0          14m
+mysql-5bc986964c-dng6x            1/1       Running   0          18m
+arun-mac:kubernetess-cookbook arunaja$ kubectl get services
+NAME             TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
+bff              ClusterIP      10.11.253.223   <none>           6060/TCP         14m
+catalogservice   ClusterIP      10.11.240.224   <none>           7070/TCP         14m
+frontend         LoadBalancer   10.11.246.122   35.226.106.229   8080:32729/TCP   14m
+kubernetes       ClusterIP      10.11.240.1     <none>           443/TCP          21m
+mysql            ClusterIP      10.11.253.1     <none>           3306/TCP         18m
+arun-mac:kubernetess-cookbook arunaja$
 
-arun-mac:~ arunaja$ kubectl get services
-NAME             TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE
-bff              ClusterIP      10.11.245.194   <none>          6060/TCP         10m
-catalogservice   ClusterIP      10.11.244.246   <none>          7070/TCP         13m
-frontend         LoadBalancer   10.11.249.62    35.232.64.189   8080:31745/TCP   10m
-kubernetes       ClusterIP      10.11.240.1     <none>          443/TCP          41m
-arun-mac:~ arunaja$
 ```
 
 # _Looking deep into the pod and understanding the environment varibales generated_
