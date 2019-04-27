@@ -47,7 +47,7 @@ arun-mac:kubernetess-cookbook arunaja$
 
 ```
 
-## _Looking in to the mysql database POD and querying the database 
+## _Looking in to the mysql database POD and querying the database_ 
 
 
 ```
