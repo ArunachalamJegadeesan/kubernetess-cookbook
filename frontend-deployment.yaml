@@ -5,18 +5,18 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: productcatalogweb
+      app: web
       tier: frontend
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
-        app: productcatalogweb
+        app: web
         tier: frontend
     spec:
       containers:
       - name: boot-web
-        image: arunaja/productcatalogwebapp:latest
+        image: arunaja/k8-web:1.0
         resources:
           requests:
             cpu: 100m
@@ -28,7 +28,7 @@ spec:
           value: "/bff/catalog"
         - name: SEPERATOR
           value: ":"
-        - name: bff.endpoint.url
+        - name: bff.uri
           value:  $(PROTOCOL)$(BFF_SERVICE_HOST)$(SEPERATOR)$(BFF_SERVICE_PORT)$(SUFIX)
         ports:
         - containerPort: 8080
@@ -38,7 +38,7 @@ kind: Service
 metadata:
   name: frontend
   labels:
-    app: productcatalogweb
+    app: web
     tier: frontend
 spec:
   # Try different proxy types, ClusterIP, NodePort
@@ -49,5 +49,5 @@ spec:
     #nodePort: 30080
     #name: http
   selector:
-    app: productcatalogweb
+    app: web
     tier: frontend
