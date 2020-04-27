@@ -5,18 +5,18 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: catalogservice
-      tier: backend
-  replicas: 2
+      app: "catalogservice"
+      tier: "microservice"
+  replicas: 1
   template:
     metadata:
       labels:
         app: catalogservice
-        tier: backend
+        tier: microservice
     spec:
       containers:
       - name: catalogservice
-        image: arunaja/catalogservice:latest  
+        image: arunaja/k8-catalogservice:2.0  
         resources:
           requests:
             cpu: 100m
@@ -25,15 +25,20 @@ spec:
         - name: PROTOCOL
           value: "jdbc:mysql://"
         - name: SUFIX
-          value: "/test?createDatabaseIfNotExist=true&useSSL=false"
+          value: "/catalog?useSSL=false"
         - name: SEPERATOR
           value: ":"
         - name: HOST
           value: $(MYSQL_PORT_3306_TCP_ADDR)$(SEPERATOR)$(MYSQL_SERVICE_PORT)
         - name: spring.datasource.url
-          value: $(PROTOCOL)$(HOST)$(SUFIX)    
+          value: $(PROTOCOL)$(HOST)$(SUFIX)
+        - name: spring.datasource.username
+          value: "app-user"  
+        - name: spring.datasource.password
+          value: "app-user"       
+
         ports:
-        - containerPort: 7070
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -41,11 +46,12 @@ metadata:
   name: catalogservice
   labels:
     app: catalogservice
-    tier: backend
+    tier: microservice
 spec:
+  type: LoadBalancer
   ports:
-  - port: 7070
-    targetPort: 7070
+  - port: 8080
+    targetPort: 8080
   selector:
     app: catalogservice
-    tier: backend
+    tier: microservice
