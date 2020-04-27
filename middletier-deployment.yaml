@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: bff
-        image: arunaja/k8-bff:2.0  
+        image: arunaja/k8-bff:1.0  
         resources:
           requests:
             cpu: 100m

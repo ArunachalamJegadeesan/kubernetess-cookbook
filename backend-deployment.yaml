@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: catalogservice
-        image: arunaja/k8-catalogservice:2.0  
+        image: arunaja/k8-catalogservice:1.0  
         resources:
           requests:
             cpu: 100m
