@@ -30,6 +30,7 @@ spec:
           value: ":"
         - name: bff.uri
           value:  $(PROTOCOL)$(BFF_SERVICE_HOST)$(SEPERATOR)$(BFF_SERVICE_PORT)$(SUFIX)
+        
         ports:
         - containerPort: 8080
 ---
